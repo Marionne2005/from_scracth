@@ -2,8 +2,10 @@ from database import Database
 from models import Student
 
 class Operations():
-    def __init__(self, db_name):
-        super().__init__(db_name)
+    def __init__(self):
+        self.db=Database()
+        self.conn = self.db.conn
+        self.cursor = self.conn.cursor()
 
     def create_student(self, student):
         self.cursor.execute(''' 
@@ -11,6 +13,7 @@ class Operations():
             VALUES (?, ?, ?, ?)
         ''', (student.get_name(), student.get_email(), student.get_gpa(), student.get_program()))
         self.conn.commit()
+        return self.cursor.lastrowid  # Return the ID of the newly created student
 
     def get_all_students(self):
         self.cursor.execute('SELECT * FROM students')
