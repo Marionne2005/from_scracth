@@ -1,4 +1,4 @@
-class Student:
+class Student():
     def __init__(self, name, email, gpa, program):
         self.name = name
         self.email = email
