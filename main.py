@@ -42,6 +42,9 @@ def main():
         elif choice == '4':   
             student_id = int(input("Enter student ID to update GPA: "))
             new_gpa = float(input("Enter new GPA: "))
+            while new_gpa < 0.0 or new_gpa > 4.0:
+                print("GPA must be between 0.0 and 4.0")
+                new_gpa = float(input("Enter new GPA: "))
             repo.update_gpa(student_id, new_gpa)
             print("GPA updated successfully!")
 
