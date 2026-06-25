@@ -20,6 +20,9 @@ def main():
             name = input("Enter name: ")
             email = input("Enter email: ")
             gpa = float(input("Enter GPA: "))
+            while gpa < 0.0 or gpa > 4.0:
+                print("GPA must be between 0.0 and 4.0")
+                gpa = float(input("Enter GPA: "))
             program = input("Enter program: ")
             student = Student(name, email, gpa, program)
             repo.create_student(student)

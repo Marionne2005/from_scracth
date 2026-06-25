@@ -6,14 +6,14 @@ class Operations():
         self.db=Database()
         self.conn = self.db.conn
         self.cursor = self.conn.cursor()
-
+        
     def create_student(self, student):
-        self.cursor.execute(''' 
-            INSERT INTO students (name, email, gpa, program) 
-            VALUES (?, ?, ?, ?)
-        ''', (student.get_name(), student.get_email(), student.get_gpa(), student.get_program()))
-        self.conn.commit()
-        return self.cursor.lastrowid  # Return the ID of the newly created student
+      self.cursor.execute('''
+        INSERT INTO students (name, email, gpa, program) 
+        VALUES (?, ?, ?, ?)
+      ''', (student.get_name(), student.get_email(), student.get_gpa(), student.get_program()))
+      self.conn.commit()
+      return self.cursor.lastrowid # Return the ID of the newly created student
 
     def get_all_students(self):
         self.cursor.execute('SELECT * FROM students')
