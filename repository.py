@@ -1,4 +1,7 @@
-class Operations(Database):
+from database import Database
+from models import Student
+
+class Operations():
     def __init__(self, db_name):
         super().__init__(db_name)
 
@@ -28,6 +31,10 @@ class Operations(Database):
             WHERE student_id = ?''', (student.get_name(), student.get_email(), student.get_gpa(), student.get_program(), student_id))
         self.conn.commit()
 
+    def update_gpa(self, student_id, new_gpa):
+        self.cursor.execute('UPDATE students SET gpa = ? WHERE student_id = ?', (new_gpa, student_id))
+        self.conn.commit()    
+
     def delete_student(self, student_id):
         self.cursor.execute('DELETE FROM students WHERE student_id = ?', (student_id,))
         self.conn.commit()
@@ -47,3 +54,6 @@ class Operations(Database):
         self.cursor.execute('SELECT AVG(gpa) FROM students')
         avg_gpa = self.cursor.fetchone()[0]
         return avg_gpa if avg_gpa is not None else 0.0
+    
+    def close(self):
+        self.conn.close()
